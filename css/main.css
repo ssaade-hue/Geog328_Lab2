@@ -83,7 +83,21 @@
 
 /* Hide the images by default */
 .mySlides {
-  display: none;
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.mySlides.active {
+  opacity: 1;
+  position: relative;
+}
+
+/* Ensure the container maintains height during transitions */
+.slideshow-container {
+  position: relative;
+  min-height: 400px; /* Adjust this value based on your images */
 }
 
 /* Next & previous buttons */
