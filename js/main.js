@@ -45,18 +45,18 @@ function showSlides(n) {
   let dots = document.getElementsByClassName("dot");
   if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
+  
+  // Remove active class from all slides and dots
   for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-    slides[i].style.opacity = "0";
+    slides[i].classList.remove("active");
   }
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active", "");
   }
+  
   if (slides.length > 0) {  // Check if slides exist
-    slides[slideIndex-1].style.display = "block";
-    setTimeout(() => {
-      slides[slideIndex-1].style.opacity = "1"; // Trigger fade in
-    }, 10); // Small delay to ensure display:block has taken effect
+    // Add active class to trigger fade transition
+    slides[slideIndex-1].classList.add("active");
     dots[slideIndex-1].className += " active";
   }
 }
