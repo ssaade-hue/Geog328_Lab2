@@ -24,8 +24,11 @@ let slideIndex = 1;
 let slideTimer = null;
 
 // Initialize the slideshow
-showSlides(slideIndex);
-startAutoSlide(); // Start automatic sliding
+// Wait for DOM so elements exist
+document.addEventListener('DOMContentLoaded', () => {
+  showSlides(slideIndex);
+  startAutoSlide(); // Start automatic sliding
+});
 
 // Next/previous controls
 function plusSlides(n) {
@@ -45,27 +48,28 @@ function showSlides(n) {
   let dots = document.getElementsByClassName("dot");
   if (n > slides.length) {slideIndex = 1}
   if (n < 1) {slideIndex = slides.length}
-  
-  // Remove active class from all slides and dots
+  if (slides.length === 0) return;
+  if (n > slides.length) { slideIndex = 1; }
+  if (n < 1) { slideIndex = slides.length; }
+
+  // Hide all slides and remove active dot
   for (i = 0; i < slides.length; i++) {
-    slides[i].classList.remove("active");
+    slides[i].classList.remove('show');
   }
   for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
+    dots[i].className = dots[i].className.replace(' active', '');
   }
-  
-  if (slides.length > 0) {  // Check if slides exist
-    // Add active class to trigger fade transition
-    slides[slideIndex-1].classList.add("active");
-    dots[slideIndex-1].className += " active";
-  }
+
+  // Show the current slide (CSS handles opacity transition)
+  slides[slideIndex - 1].classList.add('show');
+  if (dots[slideIndex - 1]) dots[slideIndex - 1].className += ' active';
 }
 
 function startAutoSlide() {
   stopAutoSlide(); // Clear any existing timer
   slideTimer = setInterval(() => {
     plusSlides(1);
-  }, 4000); // Change slide every 4 seconds
+  }, 3000); // Change slide every 3 seconds
 }
 
 function stopAutoSlide() {
