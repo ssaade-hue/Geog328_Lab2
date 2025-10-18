@@ -33,10 +33,33 @@
     </div>
 
     <!-- Page content -->
-    <div class="content">
-        <!-- Section 2 content -->
-        This is section 2.
-    </div>
+        <div class="content">
+                <!-- Section 2 content -->
+                <h2>Section 2: Toggle Bar Example</h2>
+                <div class="toggle-bar-container">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggleImage" checked>
+                        <span class="slider"></span>
+                    </label>
+                    <span class="toggle-label">Show Image</span>
+                </div>
+                <div id="toggleImageContainer" class="toggle-image-container">
+                    <img src="img/download.jpg" alt="Cover" class="toggle-image">
+                </div>
+        </div>
+
+        <script>
+        // Toggle image visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('toggleImage');
+            const imgContainer = document.getElementById('toggleImageContainer');
+            toggle.addEventListener('change', function() {
+                imgContainer.style.display = toggle.checked ? 'block' : 'none';
+            });
+            // Set initial state
+            imgContainer.style.display = toggle.checked ? 'block' : 'none';
+        });
+        </script>
 
     <!-- Including the main.js file for JavaScript functionality -->
     <script src="js/main.js"></script>
